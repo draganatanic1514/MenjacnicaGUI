@@ -50,7 +50,8 @@ public class GUIKontroler {
 	public static void dodajKurs(String sifra, String naziv, double prodajniKurs, double kupovniKurs,
 			double srednjiKurs, String skraceniNaziv) {
 		String s = "Sifra:" + sifra + " Naziv: " + naziv + " Prodajni kurs: " + prodajniKurs + 
-				" Kupovni kurs: " + kupovniKurs + " Srednji kurs: " + srednjiKurs + " Skraceni naziv: " + skraceniNaziv;
+				" Kupovni kurs: " + kupovniKurs + " Srednji kurs: " + srednjiKurs + " Skraceni naziv: " + skraceniNaziv+
+				System.lineSeparator();
 		
 		menjacnica.getTextArea_1().append(s);
 		
@@ -58,5 +59,26 @@ public class GUIKontroler {
 		d.addRow(new Object[] {sifra, skraceniNaziv, prodajniKurs, srednjiKurs, kupovniKurs, naziv});
 		
 		dodajKursGui.dispose();
+	}
+	
+	public static void obrisiKurs(int red) {
+		int opcija = JOptionPane.showConfirmDialog(menjacnica.getContentPane(), "Da li ste sigurni da zelite "
+				+ "da izbrisete izabrani kurs?", "Potvrda", JOptionPane.YES_NO_OPTION);
+		
+		if (opcija == JOptionPane.YES_OPTION) {
+			DefaultTableModel d = (DefaultTableModel) menjacnica.getTable().getModel();
+			d.removeRow(red);
+			
+			JOptionPane.showMessageDialog(menjacnica.getContentPane(), "Kurs je uspesno obrisan!", "Obavestenje", 
+					JOptionPane.INFORMATION_MESSAGE);
+			
+			String s = "Izbrisan je red sa indeskom: " +red+ System.lineSeparator();
+			
+			menjacnica.getTextArea_1().append(s);
+		}
+		else {
+			JOptionPane.showMessageDialog(menjacnica.getContentPane(), "Kurs nije obrisan!", "Greska", 
+					JOptionPane.ERROR_MESSAGE);
+		}
 	}
 }

@@ -10,6 +10,7 @@ import java.awt.Toolkit;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
@@ -209,6 +210,17 @@ public class MenjacnicaGUI extends JFrame {
 	private JButton getBtnIzbrisiKurs() {
 		if (btnIzbrisiKurs == null) {
 			btnIzbrisiKurs = new JButton("Izbrisi kurs");
+			btnIzbrisiKurs.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					int red = getTable().getSelectedRow();
+					if (red >= 0) {
+						GUIKontroler.obrisiKurs(red);
+					}
+					else {
+						JOptionPane.showMessageDialog(getTable(), "Izaberite red za brisanje", "Greska", JOptionPane.ERROR_MESSAGE);
+					}
+				}
+			});
 			btnIzbrisiKurs.setPreferredSize(new Dimension(120, 25));
 		}
 		return btnIzbrisiKurs;
@@ -311,6 +323,17 @@ public class MenjacnicaGUI extends JFrame {
 	private JMenuItem getMntmIzbrisiKurs() {
 		if (mntmIzbrisiKurs == null) {
 			mntmIzbrisiKurs = new JMenuItem("Izbrisi kurs");
+			mntmIzbrisiKurs.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					int red = getTable().getSelectedRow();
+					if (red >= 0) {
+						GUIKontroler.obrisiKurs(red);
+					}
+					else {
+						JOptionPane.showMessageDialog(getTable(), "Izaberite red za brisanje", "Greska", JOptionPane.ERROR_MESSAGE);
+					}
+				}
+			});
 		}
 		return mntmIzbrisiKurs;
 	}
