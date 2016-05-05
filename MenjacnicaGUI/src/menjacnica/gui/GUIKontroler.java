@@ -1,7 +1,9 @@
 package menjacnica.gui;
 
 import java.awt.EventQueue;
+import java.io.File;
 
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -9,6 +11,7 @@ public class GUIKontroler {
 
 	private static MenjacnicaGUI menjacnica;
 	private static DodajKursGUI dodajKursGui;
+	private static IzvrsiZamenuGUI izvrsiZamenuGui;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -22,6 +25,28 @@ public class GUIKontroler {
 
 			}
 		});
+	}
+	
+	public static void dodajTekst(String t){
+		menjacnica.getTextArea_1().append(t);
+	}
+	
+	public static void ucitajIzFajla() {
+		JFileChooser fc = new JFileChooser();
+		int izbor = fc.showOpenDialog(menjacnica.getContentPane());
+		if (izbor == JFileChooser.APPROVE_OPTION) {
+			File fajl = fc.getSelectedFile();
+			dodajTekst("Ucitan fajl:" +fajl.getAbsolutePath()+ System.lineSeparator());
+		}
+	}
+	
+	public static void sacuvajUFajl() {
+		JFileChooser fc = new JFileChooser();
+		int izbor = fc.showSaveDialog(menjacnica.getContentPane());
+		if (izbor == JFileChooser.APPROVE_OPTION) {
+			File fajl = fc.getSelectedFile();
+			dodajTekst("Sacuvan fajl:" +fajl.getAbsolutePath()+ System.lineSeparator());
+		}
 	}
 
 	public static void izadji() {
@@ -81,4 +106,16 @@ public class GUIKontroler {
 					JOptionPane.ERROR_MESSAGE);
 		}
 	}
+	
+	public static void prikaziIzvrsiZamenuGui() {
+		if(izvrsiZamenuGui == null) {
+			izvrsiZamenuGui = new IzvrsiZamenuGUI();
+			izvrsiZamenuGui.setLocationRelativeTo(null);
+			izvrsiZamenuGui.setVisible(true);
+		} else {
+			izvrsiZamenuGui.toFront();
+		}
+	}
+	
+	
 }

@@ -125,7 +125,7 @@ public class MenjacnicaGUI extends JFrame {
 			mntmNewMenuItem = new JMenuItem("Open");
 			mntmNewMenuItem.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					ucitajIzFajla();
+					GUIKontroler.ucitajIzFajla();
 				}
 			});
 			mntmNewMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
@@ -140,7 +140,7 @@ public class MenjacnicaGUI extends JFrame {
 			mntmSave = new JMenuItem("Save");
 			mntmSave.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					sacuvajUFajl();
+					GUIKontroler.sacuvajUFajl();
 				}
 			});
 			mntmSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
@@ -229,6 +229,11 @@ public class MenjacnicaGUI extends JFrame {
 	private JButton getBtnIzvrsiZamenu() {
 		if (btnIzvrsiZamenu == null) {
 			btnIzvrsiZamenu = new JButton("Izvrsi zamenu");
+			btnIzvrsiZamenu.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					GUIKontroler.prikaziIzvrsiZamenuGui();
+				}
+			});
 			btnIzvrsiZamenu.setPreferredSize(new Dimension(120, 25));
 		}
 		return btnIzvrsiZamenu;
@@ -340,25 +345,12 @@ public class MenjacnicaGUI extends JFrame {
 	private JMenuItem getMntmIzvrsiZamenu() {
 		if (mntmIzvrsiZamenu == null) {
 			mntmIzvrsiZamenu = new JMenuItem("Izvrsi zamenu");
+			mntmIzvrsiZamenu.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					GUIKontroler.prikaziIzvrsiZamenuGui();
+				}
+			});
 		}
 		return mntmIzvrsiZamenu;
-	}
-	
-	private void ucitajIzFajla() {
-		JFileChooser fc = new JFileChooser();
-		int izbor = fc.showOpenDialog(contentPane);
-		if (izbor == JFileChooser.APPROVE_OPTION) {
-			File fajl = fc.getSelectedFile();
-			textArea.append("Ucitan fajl:" +fajl.getAbsolutePath());
-		}
-	}
-	
-	private void sacuvajUFajl() {
-		JFileChooser fc = new JFileChooser();
-		int izbor = fc.showSaveDialog(contentPane);
-		if (izbor == JFileChooser.APPROVE_OPTION) {
-			File fajl = fc.getSelectedFile();
-			textArea.append("Sacuvan fajl:" +fajl.getAbsolutePath());
-		}
 	}
 }
